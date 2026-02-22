@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string solve(string s){
+        vector<string> special;
+        int start=0;
+        int sum=0;
+        for(int i=0;i<s.length();i++){
+            sum+=s[i]=='1'?1:-1;
+            if(sum==0){
+                special.push_back("1"+solve(s.substr(start+1,i-start-1))+"0");
+                start=i+1;
+            }
+            
+        } 
+        sort(begin(special),end(special),greater<string>());
+        string result;
+        for(string &str:special){
+            result+=str;
+        }
+        return result;
+    }
+    string makeLargestSpecial(string s) {
+        return solve(s);
+    }
+};
