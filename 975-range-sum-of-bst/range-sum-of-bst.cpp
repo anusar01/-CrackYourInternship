@@ -14,11 +14,16 @@ public:
     int sum=0;
     void dfs(TreeNode* node,int low,int high){
         if(node){
-            if(node->val>=low &&node->val<=high){
+            if(node->val<low){
+                dfs(node->right,low,high);
+            }else if(node->val>high){
+                dfs(node->left,low,high);
+            }else{
                 sum+=node->val;
+                dfs(node->right,low,high);
+                dfs(node->left,low,high);
             }
-            dfs(node->left,low,high);
-            dfs(node->right,low,high);
+            
         }
     }
     int rangeSumBST(TreeNode* root, int low, int high) {
